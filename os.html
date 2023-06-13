@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-5HYRSC89XP"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-5HYRSC89XP');
+  </script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <!--
+  This is a straightforward website you can open when your coworker
+  steps away from their desk without locking the screen, or when you need
+  a 20-minute break. In my view, this prank is more enjoyable
+  (and less risky) than leaving silly messages on their wall
+  or sending emails!
+
+  Propulsed by Cyrille Varin - cyrillevarin.com
+  -->
+  <title>Installation de la mise à jour macOS</title>
+  <link rel="apple-touch-icon" sizes="57x57" href="/icon/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/icon/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/icon/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/icon/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/icon/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/icon/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/icon/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/icon/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/icon/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/icon/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/icon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/icon/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/icon/favicon-16x16.png">
+  <link rel="manifest" href="/icon/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/icon/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+  <style type="text/css">
+    body {
+      background-color: black;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      height: 100vh;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    .progress-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      margin-bottom: 280px;
+    }
+
+    .progress-bar {
+      width: 200px;
+      height: 10px;
+      background-color: gray;
+      position: relative;
+      margin-bottom: 20px;
+      border-radius: 5px;
+      overflow: hidden;
+    }
+
+    .progress-bar .progress {
+      height: 100%;
+      width: 0%;
+      background-color: white;
+      position: absolute;
+      animation: progress-animation 1200s infinite linear;
+      border-radius: 5px;
+    }
+
+    @keyframes progress-animation {
+      0% {
+        width: 0%;
+      }
+      50% {
+        width: 100%;
+      }
+      100% {
+        width: 0%;
+      }
+    }
+
+    .time-remaining {
+      color: white;
+      font-size: 10px;
+      text-align: center;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 25vh;
+      width: auto;
+      margin-bottom: 70px;
+    }
+
+    .logo {
+      max-width: 100px;
+      max-height: 100px;
+    }
+  </style>
+</head>
+<body>
+  <div class="progress-container">
+    <div class="logo-container">
+      <img src="img/apple_os_logo_white.png" alt="Apple Logo" class="logo">
+    </div>
+    <div class="progress-bar">
+      <div class="progress"></div>
+    </div>
+    <div class="time-remaining" id="timeRemaining">Installing About 20 minutes remaining</div>
+  </div>
+
+  <script>
+    var progressBar = document.querySelector('.progress');
+    var timeRemaining = document.querySelector('#timeRemaining');
+
+    var totalTime = 20 * 60 * 1000; // Temps total en millisecondes (20 minutes)
+
+    var elapsedTime = 0;
+    var remainingTime = totalTime;
+    var timerId;
+
+    function updateProgressBar() {
+      elapsedTime += 1000;
+
+      var progressPercent = (elapsedTime / totalTime) * 100;
+      progressBar.style.width = progressPercent + '%';
+
+      var minutesRemaining = Math.floor((remainingTime / 1000) / 60);
+      timeRemaining.textContent = 'Installing About ' + minutesRemaining + ' minutes remaining';
+
+      remainingTime -= 1000;
+
+      if (elapsedTime >= totalTime) {
+        clearInterval(timerId);
+        timeRemaining.textContent = 'Installation complete!';
+      }
+    }
+
+    // Démarrer la mise à jour de la barre de progression
+    timerId = setInterval(updateProgressBar, 1000);
+
+    // Désactiver la souris
+    document.addEventListener('DOMContentLoaded', function() {
+      document.body.style.cursor = 'none';
+    });
+
+    // Mettre la page en plein écran
+    document.addEventListener('DOMContentLoaded', function() {
+      var elem = document.documentElement;
+      if (elem.requestFullscreen) {
+        elem.requestFullscreen();
+      } else if (elem.mozRequestFullScreen) {
+        elem.mozRequestFullScreen();
+      } else if (elem.webkitRequestFullscreen) {
+        elem.webkitRequestFullscreen();
+      } else if (elem.msRequestFullscreen) {
+        elem.msRequestFullscreen();
+      }
+    });
+  </script>
+</body>
+</html>
